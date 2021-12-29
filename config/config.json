@@ -4,7 +4,7 @@
     "password": "1234",
     "database": "HotelSystem",
     "host": "127.0.0.1",
-    "port":"5431",
+    "port":"5432",
     "dialect": "postgres"
   },
   "test": {

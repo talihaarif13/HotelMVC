@@ -1,7 +1,7 @@
 const reservationModel = require('../models').Reservation;
 const roomModel = require('../models').room;
 
-module.exports.createReservation = async (req, res) => {
+const createReservation = async (req, res) => {
     try{
         let room = await roomModel.findByPk(req.body.room_id);
         if(!room){
@@ -44,7 +44,7 @@ module.exports.createReservation = async (req, res) => {
         res.status(500).json({'error' : err });
     }
 };
-module.exports.updateReservation = async(req, res) => {
+const updateReservation = async(req, res) => {
     try{
         let update_data = {};
         if(req.body.starting_date){
@@ -66,7 +66,7 @@ module.exports.updateReservation = async(req, res) => {
         res.status(500).json({'error' : err });
     }
 }
-module.exports.deleteSpecificRoomReservation = async(req,res) => {
+const deleteSpecificRoomReservation = async(req,res) => {
     try{
         let update_room_status = await roomModel.update({
             status : "available"
@@ -87,7 +87,7 @@ module.exports.deleteSpecificRoomReservation = async(req,res) => {
         res.status(500).json({'error' : err });
     }
 }
-module.exports.deleteUserAllReservation = async(req, res) => {
+const deleteUserAllReservation = async(req, res) => {
     try{
         let reserved_user_rooms = await reservationModel.findAll({
             where : {
@@ -111,4 +111,11 @@ module.exports.deleteUserAllReservation = async(req, res) => {
         console.log(err);
         res.status(500).json({'error' : err });
     }
+}
+
+module.exports = {
+    createReservation,
+    updateReservation,
+    deleteSpecificRoomReservation,
+    deleteUserAllReservation
 }

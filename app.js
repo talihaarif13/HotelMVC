@@ -1,15 +1,18 @@
 const express = require('express');
 const app = express()
 var bodyParser = require("body-parser");
+
+//swagger file
+const swaggerUi = require('swagger-ui-express');
+const YAML = require('yamljs');
+const swaggerDocument = YAML.load('./swagger.yaml');
+
+//routes import
 const hotelRoutes = require('./routes/hotel');
 const userRoutes = require('./routes/user');
 const roomRoutes = require('./routes/room');
 const reservationRoutes = require('./routes/reservation');
 const serviceRoutes = require('./routes/services');
-const swaggerUi = require('swagger-ui-express');
-const YAML = require('yamljs');
-const swaggerDocument = YAML.load('./swagger.yaml');
-
 
 //make uploads folder static to access photos
 app.use('/uploads', express.static('uploads'));

@@ -1,9 +1,10 @@
 const express = require("express");
 var router = express.Router();
-const hotelController = require("../controllers/hotel");
-const verifyMiddleware = require('../middlewares/verify');
 const multer = require('multer');
 const path = require('path');
+
+const hotelController = require("../controllers/hotel");
+const verifyMiddleware = require('../middlewares/verify');
 
 const storage = multer.diskStorage({
     destination: function(req, file, cb) {

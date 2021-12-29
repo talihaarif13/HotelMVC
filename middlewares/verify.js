@@ -1,7 +1,6 @@
 const jwt = require('jsonwebtoken');
 
-
-module.exports.verifyToken = (req, res, next) => {
+const verifyToken = (req, res, next) => {
     const token = req.body.token || req.query.token || req.headers['token'];
     if(!token){
         res.status(400).json({err: 'token required'}); 
@@ -15,4 +14,7 @@ module.exports.verifyToken = (req, res, next) => {
         return;
     }
     next();
+}
+module.exports = {
+    verifyToken
 }

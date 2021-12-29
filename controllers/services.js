@@ -2,7 +2,7 @@ const serviceModel = require('../models').Service;
 const roomServicesModel = require('../models').RoomService;
 const roomModel = require('../models').room;
 
-module.exports.createService = async (req, res, next) => {
+const createService = async (req, res, next) => {
     try{
         let service = await serviceModel.create({
             'name' : req.body.name,
@@ -19,7 +19,7 @@ module.exports.createService = async (req, res, next) => {
         // }
     }
 }
-module.exports.addRoomService = async(req, res) => {
+const addRoomService = async(req, res) => {
     try{
         let room = await roomModel.findByPk(req.body.room_id);
         let service = await serviceModel.findByPk(req.body.service_id);
@@ -35,7 +35,7 @@ module.exports.addRoomService = async(req, res) => {
         res.status(500).json({'error' : err });
     }
 };
-module.exports.fetchRoomServices = async(req,res) => {
+const fetchRoomServices = async(req,res) => {
     try{
         let room_services = await roomModel.findOne({
             where : {
@@ -52,7 +52,7 @@ module.exports.fetchRoomServices = async(req,res) => {
         res.status(500).json({'error' : err });
     }
 }
-module.exports.deleteService = async(req, res) => {
+const deleteService = async(req, res) => {
     try{
         let delete_service = await serviceModel.destroy({
             where : {
@@ -64,4 +64,11 @@ module.exports.deleteService = async(req, res) => {
         console.log(err);
         res.status(500).json({'error' : err });
     }
+}
+
+module.exports = {
+    createService,
+    deleteService,
+    addRoomService,
+    fetchRoomServices
 }

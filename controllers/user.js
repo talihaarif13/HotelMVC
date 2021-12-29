@@ -1,11 +1,13 @@
-const customerModel = require('../models').customer;
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const reservationModel = require('../models').Reservation;
 const { validationResult } = require('express-validator');
 const {ValidationError} = require('sequelize');
 
-module.exports.signup = async(req, res)  => {
+const customerModel = require('../models').customer;
+const reservationModel = require('../models').Reservation;
+
+
+const signup = async(req, res)  => {
     try{
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
@@ -31,7 +33,7 @@ module.exports.signup = async(req, res)  => {
         }
     }
 }
-module.exports.login = async(req,res) => {
+const login = async(req,res) => {
     try{
         if(req.body.email && req.body.password){
             let user = await customerModel.findOne({
@@ -64,7 +66,7 @@ module.exports.login = async(req,res) => {
         res.status(500).json({'error' : err });
     }
 }
-module.exports.fetchUserReservations = async(req, res )=>{
+const fetchUserReservations = async(req, res )=>{
     try{
         let user_reservations = await reservationModel.findAll({
             where : {
@@ -77,5 +79,9 @@ module.exports.fetchUserReservations = async(req, res )=>{
         res.status(500).json({'error' : err });
     }
 }
-
+module.exports = {
+    signup,
+    login,
+    fetchUserReservations
+}
 

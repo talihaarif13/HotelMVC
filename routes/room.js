@@ -1,5 +1,6 @@
 const express = require("express");
 var router = express.Router();
+
 const roomController = require('../controllers/room');
 const formValidation = require('../validations/formValidation');
 const verifyMiddleware = require('../middlewares/verify');

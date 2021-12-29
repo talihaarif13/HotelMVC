@@ -1,7 +1,7 @@
 const hotelModel = require('../models').Hotel;
 const {ValidationError} = require('sequelize');
 
-module.exports.createHotel = async (req, res, next) => {
+const createHotel = async (req, res, next) => {
     try{
         console.log('com2');
         console.log(req.file);
@@ -20,7 +20,7 @@ module.exports.createHotel = async (req, res, next) => {
         }
     }
 }
-module.exports.updateHotel = async (req, res) => {
+const updateHotel = async (req, res) => {
     try{
         console.log('com2');
         let update_data = {};
@@ -41,7 +41,7 @@ module.exports.updateHotel = async (req, res) => {
         res.status(500).json({'error' : err });
     }
 }
-module.exports.deleteHotel = async (req, res) => {
+const deleteHotel = async (req, res) => {
     try{
         let hotel = await hotelModel.destroy({
             where: {
@@ -54,7 +54,7 @@ module.exports.deleteHotel = async (req, res) => {
         res.status(500).json({'error' : err });
     }
 }
-module.exports.fetchHotels = async (req,res) => {
+const fetchHotels = async (req,res) => {
     try{
         let all_hotels = await hotelModel.findAll();
         res.status(200).json(all_hotels);
@@ -64,6 +64,14 @@ module.exports.fetchHotels = async (req,res) => {
     }
 }
 
+
+
+module.exports = {
+    createHotel, 
+    updateHotel,
+    deleteHotel,
+    fetchHotels
+}
 
 
 
