@@ -42,7 +42,7 @@ const login = async(req,res) => {
                 }
             });
             if(!user){
-                res.status(400).json({'err': 'user not found'});
+                res.status(400).json({'error': 'user not found'});
             }
             const validPassword = await bcrypt.compare(req.body.password.toString(), user.password);
             if(validPassword){

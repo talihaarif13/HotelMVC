@@ -14,6 +14,12 @@ const roomRoutes = require('./routes/room');
 const reservationRoutes = require('./routes/reservation');
 const serviceRoutes = require('./routes/services');
 
+//cors
+const cors = require('cors');
+app.use(cors({
+  origin: '*'
+}));
+
 //make uploads folder static to access photos
 app.use('/uploads', express.static('uploads'));
 
@@ -65,6 +71,9 @@ app.post("/file/zip", upload.array("documents", 5), (req, res) => {
         res.status(200).send("ok");
     }
 });
+
+
+ 
 
 app.listen(3000, () => {
     console.log("app listening on 3000");

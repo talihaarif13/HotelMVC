@@ -281,7 +281,7 @@ paths:
         "200":
           description: "Successfully deleted"
   /reservation/deleteSpecific:
-    delete:
+    post:
       tags:
       - "reservation"
       summary: "Deletes/Cancel a specific reservation"

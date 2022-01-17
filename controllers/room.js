@@ -25,7 +25,7 @@ const createRoom = async(req, res) => {
         });
         //create hotel association
         await room.setHotel(hotel);
-        res.status(200).json('done');
+        res.status(200).json(room);
     }catch(err){
         console.log(err);
         res.status(500).json({'error' : err });
@@ -33,9 +33,10 @@ const createRoom = async(req, res) => {
 };
 const getHotelRooms = async (req,res) => {
     try{
+        console.log(req);
         let hotel_rooms = await roomModel.findAll({
             where: {
-                hotel_id : req.body.hotel_id
+                hotel_id : req.query.hotel_id
             }
         });
         res.status(200).json(hotel_rooms);

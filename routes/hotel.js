@@ -21,7 +21,7 @@ let upload = multer({ storage: storage});
 
 router.post("/", verifyMiddleware.verifyToken, upload.single('picture') , hotelController.createHotel);
 router.put("/", verifyMiddleware.verifyToken, hotelController.updateHotel);
-router.delete("/", verifyMiddleware.verifyToken, hotelController.deleteHotel);
+router.post("/delete", verifyMiddleware.verifyToken, hotelController.deleteHotel);
 router.get("/", verifyMiddleware.verifyToken , hotelController.fetchHotels);
 
 module.exports = router;

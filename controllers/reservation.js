@@ -4,8 +4,8 @@ const roomModel = require('../models').room;
 const createReservation = async (req, res) => {
     try{
         let room = await roomModel.findByPk(req.body.room_id);
-        if(!room){
-            res.status(400).json({error : "room does not exists"});
+        if(!room || room.status !== 'available'){
+            res.status(400).json({error : "Invalid Room"});
             return;
         }
         console.log("user_id", req.data);
@@ -37,7 +37,7 @@ const createReservation = async (req, res) => {
             });
             res.status(200).json(reservation);
         }else{
-            res.status(200).json({err : "already exist"});
+            res.status(200).json({error : "already exist"});
         }
     }catch(err){
         console.log(err);
@@ -68,6 +68,8 @@ const updateReservation = async(req, res) => {
 }
 const deleteSpecificRoomReservation = async(req,res) => {
     try{
+        console.log(req.body.room_id);
+        console.log("type", typeof(req.body.room_id));
         let update_room_status = await roomModel.update({
             status : "available"
         }, {
